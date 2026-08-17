@@ -401,6 +401,7 @@ a {
   position: relative;
   aspect-ratio: 3 / 4;
   max-height: 58vh;
+  margin-inline: auto;
   overflow: hidden;
   background: #02090d;
 }
