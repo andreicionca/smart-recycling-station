@@ -183,7 +183,7 @@
       category === 'HUMAN_CHECK'
         ? 'AI-ul nu poate clasifica obiectul cu suficientă siguranță. Operatorul trebuie să decidă.'
         : result.reason || 'Clasificare finalizată.';
-    document.querySelector(`[data-category="${category}"]`)?.classList.add('active');
+    document.querySelector(`.category-grid [data-category="${category}"]`)?.classList.add('active');
 
     if (typeof result.confidence === 'number' && result.confidence >= 0 && result.confidence <= 1) {
       confidenceValue.textContent = `${Math.round(result.confidence * 100)}%`;

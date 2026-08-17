@@ -947,14 +947,17 @@ a {
   gap: clamp(25px, 4vw, 60px);
 }
 .result-icon {
+  width: min(100%, 180px);
   aspect-ratio: 1;
+  justify-self: center;
   display: grid;
   place-items: center;
   border: 2px solid var(--green);
   border-radius: 50%;
   color: var(--green);
   background: rgba(102, 228, 122, 0.05);
-  font-size: clamp(3.5rem, 8vw, 7.8rem);
+  font-size: clamp(3.2rem, 5vw, 5.4rem);
+  line-height: 1;
   box-shadow: 0 0 40px rgba(102, 228, 122, 0.08);
 }
 .result-content h1 {
