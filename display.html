@@ -1,88 +1,117 @@
 <!doctype html>
 <html lang="ro">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#06131c">
-  <title>Ecran de control · Smart Recycling Station</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="display-page">
-  <header class="display-header">
-    <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">♻</span>
-      <span><strong>SMART RECYCLING STATION</strong><small>AI Vision Sorting System</small></span>
-    </a>
-    <div class="header-actions">
-      <span id="onlinePill" class="system-pill warning"><i></i> AȘTEPT CONEXIUNEA</span>
-      <button id="fullscreenButton" class="icon-button" type="button" aria-label="Afișează pe tot ecranul" title="Tot ecranul">⛶</button>
-      <time id="clock">--:--:--</time>
-    </div>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#06131c" />
+    <title>Ecran de control · Smart Recycling Station</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="display-page">
+    <header class="display-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">♻</span>
+        <span><strong>SMART RECYCLING STATION</strong><small>AI Vision Sorting System</small></span>
+      </a>
+      <div class="header-session" aria-label="Codul sesiunii curente">
+        <span>COD SESIUNE</span>
+        <strong id="displaySessionCode">····</strong>
+        <button
+          id="newSessionButton"
+          class="text-button"
+          type="button"
+          title="Generează un cod nou"
+        >
+          COD NOU
+        </button>
+      </div>
+      <div class="header-actions">
+        <span id="onlinePill" class="system-pill warning"><i></i> AȘTEPT CONEXIUNEA</span>
+        <button
+          id="fullscreenButton"
+          class="icon-button"
+          type="button"
+          aria-label="Afișează pe tot ecranul"
+          title="Tot ecranul"
+        >
+          ⛶
+        </button>
+        <time id="clock">--:--:--</time>
+      </div>
+    </header>
 
-  <main class="hmi-grid">
-    <section class="hmi-left">
-      <article class="panel live-panel">
-        <header><b>LIVE CAMERA</b><span id="liveBadge" class="panel-badge">WAITING</span></header>
-        <div class="remote-video-wrap">
-          <video id="remoteVideo" autoplay playsinline muted></video>
-          <div id="videoPlaceholder" class="video-placeholder">
-            <span class="radar" aria-hidden="true"></span>
-            <b>AȘTEPT FLUXUL VIDEO</b>
-            <small>Conectează telefonul folosind codul sesiunii</small>
+    <main class="hmi-grid">
+      <section class="hmi-left">
+        <article class="panel live-panel">
+          <header><b>LIVE CAMERA</b><span id="liveBadge" class="panel-badge">WAITING</span></header>
+          <div class="remote-video-wrap">
+            <video id="remoteVideo" autoplay playsinline muted></video>
+            <div id="videoPlaceholder" class="video-placeholder">
+              <span class="radar" aria-hidden="true"></span>
+              <b>AȘTEPT FLUXUL VIDEO</b>
+              <small>Conectează telefonul folosind codul sesiunii</small>
+            </div>
+            <div class="target-guide remote-guide" aria-hidden="true">
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <div class="remote-scan-beam" aria-hidden="true"></div>
+            <div id="remoteScanStatus" class="remote-scan-status" aria-live="polite">
+              <b id="remoteScanTitle">DETECTEZ OBIECTUL...</b>
+              <span id="remoteScanDetail">Procesare vision activă</span>
+            </div>
           </div>
-          <div class="target-guide remote-guide" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        </div>
-      </article>
+        </article>
+      </section>
 
-      <article class="panel session-panel">
-        <div><small>COD SESIUNE</small><strong id="displaySessionCode">····</strong></div>
-        <p>Introdu acest cod pe telefon</p>
-        <button id="newSessionButton" class="text-button" type="button">GENEREAZĂ COD NOU</button>
-      </article>
-
-      <article class="panel status-panel">
-        <header><b>STATUS SISTEM</b></header>
-        <ul>
-          <li><span><i id="cameraDot"></i> Cameră telefon</span><b id="cameraState">ÎN AȘTEPTARE</b></li>
-          <li><span><i></i> Model AI</span><b>STANDBY</b></li>
-          <li><span><i id="connectionDot"></i> Conexiune WebRTC</span><b id="connectionState">OFFLINE</b></li>
-          <li><span><i></i> Operator uman</span><b>READY</b></li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="hmi-right">
-      <article id="resultPanel" class="panel result-panel" data-state="READY">
-        <header><b>REZULTAT ANALIZĂ</b><span id="stateBadge" class="panel-badge">READY</span></header>
-        <div class="result-content">
-          <div id="resultIcon" class="result-icon" aria-hidden="true">♻</div>
-          <div>
-            <p id="displayKicker" class="eyebrow">SMART RECYCLING STATION</p>
-            <h1 id="displayState">SYSTEM ONLINE</h1>
-            <h2 id="displayInstruction">Aștept obiect...</h2>
-            <p id="displayReason" class="result-reason">Sistemul este pregătit pentru următoarea scanare.</p>
-            <p id="confidenceLine" class="confidence" hidden>Încredere AI: <b id="confidenceValue"></b></p>
+      <section class="hmi-right">
+        <article id="resultPanel" class="panel result-panel" data-state="READY">
+          <header>
+            <b>REZULTAT ANALIZĂ</b><span id="stateBadge" class="panel-badge">READY</span>
+          </header>
+          <div class="result-content">
+            <div id="resultIcon" class="result-icon" aria-hidden="true">♻</div>
+            <div>
+              <p id="displayKicker" class="eyebrow">SMART RECYCLING STATION</p>
+              <h1 id="displayState">SYSTEM ONLINE</h1>
+              <h2 id="displayInstruction">Aștept obiect...</h2>
+              <p id="displayReason" class="result-reason">
+                Sistemul este pregătit pentru următoarea scanare.
+              </p>
+              <p id="confidenceLine" class="confidence" hidden>
+                Încredere AI: <b id="confidenceValue"></b>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="analysis-progress" id="analysisProgress"><span></span></div>
-      </article>
+          <div class="analysis-progress" id="analysisProgress"><span></span></div>
+        </article>
 
-      <article class="panel categories-panel">
-        <header><b>CATEGORII DE SORTARE</b><small>AI recomandă · operatorul decide</small></header>
-        <div class="category-grid">
-          <div data-category="PLASTIC"><span>♳</span><b>PLASTIC</b></div>
-          <div data-category="PAPER"><span>▤</span><b>HÂRTIE</b></div>
-          <div data-category="OTHER"><span>♲</span><b>ALTELE</b></div>
-          <div data-category="HUMAN_CHECK"><span>⚠</span><b>VERIFICARE UMANĂ</b></div>
-        </div>
-      </article>
-    </section>
-  </main>
+        <article class="panel categories-panel">
+          <header>
+            <b>CATEGORII DE SORTARE</b><small>AI recomandă · operatorul decide</small>
+          </header>
+          <div class="category-grid">
+            <div data-category="PLASTIC"><span>♳</span><b>PLASTIC</b></div>
+            <div data-category="PAPER"><span>▤</span><b>HÂRTIE</b></div>
+            <div data-category="OTHER"><span>♲</span><b>ALTELE</b></div>
+            <div data-category="HUMAN_CHECK"><span>⚠</span><b>VERIFICARE UMANĂ</b></div>
+          </div>
+        </article>
+      </section>
+    </main>
 
-  <footer class="display-footer"><span>ID Sistem: SRS-EDU-01</span><span>Mod: HUMAN-IN-THE-LOOP</span><span>WebRTC · AI VISION</span></footer>
-  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
-  <script src="js/webrtc.js"></script>
-  <script src="js/display.js"></script>
-</body>
+    <footer class="display-footer">
+      <div class="footer-status" aria-label="Status sistem">
+        <span><i id="cameraDot" class="off"></i>Cameră <b id="cameraState">ÎN AȘTEPTARE</b></span>
+        <span><i id="aiDot"></i>Model AI <b id="aiState">STANDBY</b></span>
+        <span
+          ><i id="connectionDot" class="off"></i>WebRTC <b id="connectionState">OFFLINE</b></span
+        >
+        <span><i></i>Operator <b>READY</b></span>
+      </div>
+      <div class="footer-meta"><span>SRS-EDU-01</span><span>HUMAN-IN-THE-LOOP</span></div>
+    </footer>
+    <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+    <script src="js/webrtc.js"></script>
+    <script src="js/display.js"></script>
+  </body>
 </html>
