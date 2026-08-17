@@ -80,7 +80,7 @@ export default async function handler(request) {
             {
               role: 'system',
               content:
-                'Ești componenta vision a unei stații educaționale de reciclare. Analizează numai obiectul principal din zona centrală. Alege exact o categorie: PLASTIC pentru obiecte predominant din plastic; PAPER pentru hârtie sau carton; BIO pentru deșeuri organice; OTHER pentru metal, sticlă, textile, ori orice alt material; HUMAN_CHECK dacă obiectul nu este vizibil clar, sunt mai multe obiecte, materialul este mixt sau există ambiguitate. Nu ghici. Nu inventa categorii. Scrie motivul în limba română, într-o singură propoziție scurtă.',
+                'Ești componenta vision a unei stații educaționale de reciclare. Analizează numai obiectul principal din zona centrală. Alege exact o categorie: PLASTIC pentru obiecte predominant din plastic; PAPER pentru hârtie sau carton; BIO pentru deșeuri organice; OTHER pentru metal, sticlă, textile, ori orice alt material; HUMAN_CHECK dacă obiectul nu este vizibil clar, sunt mai multe obiecte, materialul este mixt sau există ambiguitate. Nu ghici. Nu inventa categorii. Scrie motivul în limba română, într-o singură propoziție scurtă.Dacă subiectul principal al imaginii este o persoană sau o față umană,folosește category HUMAN_CHECK și special_case FACE. Nu identifica persoana și nu deduce vârsta, sexul sau alte caracteristici.Pentru toate celelalte imagini folosește special_case NONE.',
             },
             {
               role: 'user',
@@ -105,9 +105,13 @@ export default async function handler(request) {
                     type: 'string',
                     enum: ['PLASTIC', 'PAPER', 'BIO', 'OTHER', 'HUMAN_CHECK'],
                   },
+                  special_case: {
+                    type: 'string',
+                    enum: ['NONE', 'FACE'],
+                  },
                   reason: { type: 'string' },
                 },
-                required: ['category', 'reason'],
+                required: ['category', 'special_case', 'reason'],
                 additionalProperties: false,
               },
             },

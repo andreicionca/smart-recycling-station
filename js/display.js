@@ -177,6 +177,21 @@
     const view = resultMap[category];
     setVideoEffect('RESULT');
     aiState.textContent = 'FINALIZAT';
+    if (result?.special_case === 'FACE') {
+      resultPanel.dataset.state = 'RESULT';
+      resultPanel.dataset.category = 'HUMAN_CHECK';
+
+      stateBadge.textContent = 'SCAN COMPLETE';
+      resultIcon.textContent = '👤';
+      displayKicker.textContent = 'SCANARE SPECIALĂ';
+      displayState.textContent = 'OPERATOR DETECTAT';
+      displayInstruction.textContent = 'Nu te putem recicla!';
+      displayReason.textContent = 'Te rugăm să introduci un obiect în zona de scanare.';
+
+      confidenceLine.hidden = true;
+      clearCategory();
+      return;
+    }
     resultPanel.dataset.state = 'RESULT';
     resultPanel.dataset.category = category;
     stateBadge.textContent = 'SCAN COMPLETE';
