@@ -178,6 +178,8 @@
     setVideoEffect('RESULT');
     aiState.textContent = 'FINALIZAT';
     if (result?.special_case === 'FACE') {
+      clearCategory();
+
       resultPanel.dataset.state = 'RESULT';
       resultPanel.dataset.category = 'HUMAN_CHECK';
 
@@ -189,7 +191,6 @@
       displayReason.textContent = 'Te rugăm să introduci un obiect în zona de scanare.';
 
       confidenceLine.hidden = true;
-      clearCategory();
       return;
     }
     resultPanel.dataset.state = 'RESULT';

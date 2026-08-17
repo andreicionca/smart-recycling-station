@@ -1,4 +1,5 @@
-const ALLOWED_CATEGORIES = new Set(['PLASTIC', 'PAPER', 'OTHER', 'HUMAN_CHECK']);
+const ALLOWED_CATEGORIES = new Set(['PLASTIC', 'PAPER', 'BIO', 'OTHER', 'HUMAN_CHECK']);
+const ALLOWED_SPECIAL_CASES = new Set(['NONE', 'FACE']);
 const DEMO_CATEGORIES = [
   { category: 'PLASTIC', reason: 'Mod demo: obiect simulat din plastic.' },
   { category: 'PAPER', reason: 'Mod demo: obiect simulat din hârtie sau carton.' },
@@ -30,6 +31,7 @@ function validateResult(result) {
   return (
     result &&
     ALLOWED_CATEGORIES.has(result.category) &&
+    ALLOWED_SPECIAL_CASES.has(result.special_case) &&
     typeof result.reason === 'string' &&
     result.reason.trim().length > 0
   );
@@ -141,7 +143,11 @@ export default async function handler(request) {
     if (!validateResult(result))
       return json({ error: 'Categoria returnată de AI nu este permisă.' }, 502);
 
-    return json({ category: result.category, reason: result.reason.trim() });
+    return json({
+      category: result.category,
+      special_case: result.special_case,
+      reason: result.reason.trim(),
+    });
   } catch (error) {
     console.error('Analyze image error', error);
     if (error.name === 'AbortError')
