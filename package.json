@@ -1,0 +1,17 @@
+{
+  "name": "smart-recycling-station",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stație educațională de sortare cu WebRTC, Netlify Functions și AI vision.",
+  "scripts": {
+    "dev": "netlify dev",
+    "check": "node --check js/webrtc.js && node --check js/scan.js && node --check js/display.js && node --check netlify/functions/signaling.js && node --check netlify/functions/analyze-image.js"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^23.0.0"
+  }
+}
