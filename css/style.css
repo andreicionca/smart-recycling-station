@@ -690,7 +690,7 @@ a {
 .hmi-grid {
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(420px, 46%) minmax(0, 1fr);
+  grid-template-columns: minmax(380px, 36%) minmax(0, 1fr);
   gap: 13px;
   padding: 13px;
 }
@@ -1169,7 +1169,7 @@ a {
     display: none;
   }
   .hmi-grid {
-    grid-template-columns: minmax(380px, 44%) minmax(0, 1fr);
+    grid-template-columns: minmax(340px, 38%) minmax(0, 1fr);
   }
 }
 @media (max-width: 850px) {
