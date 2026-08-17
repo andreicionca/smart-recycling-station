@@ -44,6 +44,11 @@
       title: 'HÂRTIE',
       instruction: 'Direcționează obiectul către compartimentul HÂRTIE',
     },
+    BIO: {
+      icon: '♧',
+      title: 'BIODEGRADABIL',
+      instruction: 'Direcționează obiectul către compartimentul BIODEGRADABIL',
+    },
     OTHER: {
       icon: '♲',
       title: 'ALTELE',
