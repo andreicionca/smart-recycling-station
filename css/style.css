@@ -60,6 +60,12 @@ a {
   font-size: 0.78rem;
   letter-spacing: 0.15em;
 }
+
+.titan-logo {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+}
 .brand {
   display: flex;
   align-items: center;

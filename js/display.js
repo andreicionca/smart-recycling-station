@@ -184,7 +184,7 @@
       resultPanel.dataset.category = 'HUMAN_CHECK';
 
       stateBadge.textContent = 'SCAN COMPLETE';
-      const faceIcons = ['🤪', '😜', '🫣', '👀', '😂'];
+      const faceIcons = ['😜', '👀'];
       resultIcon.textContent = faceIcons[Math.floor(Math.random() * faceIcons.length)];
       displayKicker.textContent = 'SCANARE SPECIALĂ';
       displayState.textContent = 'OPERATOR DETECTAT';
