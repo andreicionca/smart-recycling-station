@@ -1,56 +1,91 @@
 <!doctype html>
 <html lang="ro">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#06131c">
-  <title>Stație de scanare · Smart Recycling Station</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="scan-page">
-  <header class="scan-header">
-    <a href="index.html" class="back-link" aria-label="Înapoi">‹</a>
-    <div><strong>STAȚIE DE SCANARE</strong><span id="scannerSystemStatus"><i></i> Inițializare...</span></div>
-    <button id="cameraRetry" class="icon-button" type="button" title="Repornește camera" aria-label="Repornește camera">↻</button>
-  </header>
-
-  <main class="scanner-shell">
-    <section id="pairPanel" class="pair-panel">
-      <p class="eyebrow">CONECTARE LA ECRAN</p>
-      <label for="sessionCode">Introdu codul de 4 cifre afișat pe laptop</label>
-      <div class="code-entry">
-        <input id="sessionCode" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}" placeholder="0000" aria-describedby="pairHelp">
-        <button id="connectButton" class="button button-secondary" type="button">CONECTEAZĂ</button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#06131c" />
+    <title>Stație de scanare · Smart Recycling Station</title>
+    <link rel="icon" type="image/png" href="/assets/icons/favicon scan.png" />
+    <link rel="apple-touch-icon" href="assets/icons/favicon scan.png" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="scan-page">
+    <header class="scan-header">
+      <a href="index.html" class="back-link" aria-label="Înapoi">‹</a>
+      <div>
+        <strong>STAȚIE DE SCANARE</strong
+        ><span id="scannerSystemStatus"><i></i> Inițializare...</span>
       </div>
-      <p id="pairHelp" class="helper-text">Deschide mai întâi <b>display.html</b> pe laptop.</p>
-    </section>
+      <button
+        id="cameraRetry"
+        class="icon-button"
+        type="button"
+        title="Repornește camera"
+        aria-label="Repornește camera"
+      >
+        ↻
+      </button>
+    </header>
 
-    <section class="camera-stage" aria-label="Imaginea camerei">
-      <video id="localVideo" autoplay playsinline muted></video>
-      <div class="camera-placeholder" id="cameraPlaceholder"><span>◉</span><b>PORNESC CAMERA...</b></div>
-      <div class="target-guide" aria-hidden="true"><i></i><i></i><i></i><i></i><span></span></div>
-      <div id="scanBeam" class="scan-beam" aria-hidden="true"></div>
-      <div class="camera-badge"><i></i> LIVE CAMERA</div>
-      <div class="scan-message" id="scanMessage" aria-live="assertive"></div>
-    </section>
+    <main class="scanner-shell">
+      <section id="pairPanel" class="pair-panel">
+        <p class="eyebrow">CONECTARE LA ECRAN</p>
+        <label for="sessionCode">Introdu codul de 4 cifre afișat pe laptop</label>
+        <div class="code-entry">
+          <input
+            id="sessionCode"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            maxlength="4"
+            pattern="[0-9]{4}"
+            placeholder="0000"
+            aria-describedby="pairHelp"
+          />
+          <button id="connectButton" class="button button-secondary" type="button">
+            CONECTEAZĂ
+          </button>
+        </div>
+        <p id="pairHelp" class="helper-text">Deschide mai întâi <b>display.html</b> pe laptop.</p>
+      </section>
 
-    <section class="scan-console">
-      <div class="process-steps" aria-label="Etapele procesului">
-        <div class="active" data-step="1"><b>1</b><span>Detectez<br>obiectul</span></div>
-        <div data-step="2"><b>2</b><span>Obiect<br>identificat</span></div>
-        <div data-step="3"><b>3</b><span>Menține<br>nemișcat</span></div>
-        <div data-step="4"><b>4</b><span>Scanare<br>3 · 2 · 1</span></div>
-      </div>
-      <div class="progress-track"><span id="scanProgress"></span></div>
-      <p id="scannerStatus" class="scanner-status" role="status">SISTEM PREGĂTIT</p>
-      <button id="startDetection" class="button detect-button" type="button" disabled><span aria-hidden="true">▶</span> PORNEȘTE DETECȚIA</button>
-      <p class="scanner-tip">Așază obiectul în cadrul ghid și menține-l nemișcat.</p>
-    </section>
-  </main>
+      <section class="camera-stage" aria-label="Imaginea camerei">
+        <video id="localVideo" autoplay playsinline muted></video>
+        <div class="camera-placeholder" id="cameraPlaceholder">
+          <span>◉</span><b>PORNESC CAMERA...</b>
+        </div>
+        <div class="target-guide" aria-hidden="true"><i></i><i></i><i></i><i></i><span></span></div>
+        <div id="scanBeam" class="scan-beam" aria-hidden="true"></div>
+        <div class="camera-badge"><i></i> LIVE CAMERA</div>
+        <div class="scan-message" id="scanMessage" aria-live="assertive"></div>
+      </section>
 
-  <canvas id="captureCanvas" hidden></canvas>
-  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
-  <script src="js/webrtc.js"></script>
-  <script src="js/scan.js"></script>
-</body>
+      <section class="scan-console">
+        <div class="process-steps" aria-label="Etapele procesului">
+          <div class="active" data-step="1">
+            <b>1</b><span>Detectez<br />obiectul</span>
+          </div>
+          <div data-step="2">
+            <b>2</b><span>Obiect<br />identificat</span>
+          </div>
+          <div data-step="3">
+            <b>3</b><span>Menține<br />nemișcat</span>
+          </div>
+          <div data-step="4">
+            <b>4</b><span>Scanare<br />3 · 2 · 1</span>
+          </div>
+        </div>
+        <div class="progress-track"><span id="scanProgress"></span></div>
+        <p id="scannerStatus" class="scanner-status" role="status">SISTEM PREGĂTIT</p>
+        <button id="startDetection" class="button detect-button" type="button" disabled>
+          <span aria-hidden="true">▶</span> PORNEȘTE DETECȚIA
+        </button>
+        <p class="scanner-tip">Așază obiectul în cadrul ghid și menține-l nemișcat.</p>
+      </section>
+    </main>
+
+    <canvas id="captureCanvas" hidden></canvas>
+    <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+    <script src="js/webrtc.js"></script>
+    <script src="js/scan.js"></script>
+  </body>
 </html>
