@@ -184,12 +184,12 @@
       resultPanel.dataset.category = 'HUMAN_CHECK';
 
       stateBadge.textContent = 'SCAN COMPLETE';
-      const faceIcons = ['😜', '👀'];
+      const faceIcons = ['😜', '👀', '🫵', '🤨', '🫣'];
       resultIcon.textContent = faceIcons[Math.floor(Math.random() * faceIcons.length)];
-      displayKicker.textContent = 'SCANARE SPECIALĂ';
-      displayState.textContent = 'OPERATOR DETECTAT';
-      displayInstruction.textContent = 'Nu te putem recicla!';
-      displayReason.textContent = 'Te rugăm să introduci un obiect în zona de scanare.';
+      displayKicker.textContent = 'ANOMALIE BIOLOGICA';
+      displayState.textContent = 'PREA VIU';
+      displayInstruction.textContent = 'Nu există pubelă pentru tine. Încă';
+      displayReason.textContent = 'Te rugăm să introduci ambalajul, nu proprietarul.';
 
       confidenceLine.hidden = true;
       return;
